@@ -4,14 +4,14 @@
 Writes one deadpan one-star review (at most 160 characters) of an everyday
 essential to /output/entry.txt (or $MAKEFUN_OUTPUT_DIR/entry.txt).
 
-The review: gravity, framed as a free service that charges interest every
-time you stand up too fast.
+The review: Monday, framed as an appointment nobody made and nobody can
+cancel — the one weekly meeting with no unsubscribe button.
 """
 
 import os
 import sys
 
-REVIEW = "Gravity works for free, then charges interest every time I stand up too fast."
+REVIEW = "Monday is the only appointment I never made and still cannot cancel."
 
 
 def main() -> int:
@@ -27,9 +27,10 @@ def main() -> int:
         return 1
 
     os.makedirs(out_dir, exist_ok=True)
-    # No trailing newline: the entry is exactly the review text, 77 chars.
+    # No trailing newline: the entry is exactly the review text, 68 chars.
     with open(path, "w", encoding="utf-8", newline="") as f:
         f.write(REVIEW)
+    os.chmod(path, 0o644)
 
     # Verify after write: exact bytes, one line, gate holds.
     with open(path, "rb") as f:
